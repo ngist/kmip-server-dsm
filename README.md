@@ -1,5 +1,7 @@
 # KMIP Server for Synology DSM
 
+This is a Fork of https://github.com/rnurgaliyev/kmip-server-dsm the only difference is that this does not do cert generation the user is expected to know how to create their own certs and install them.
+
 This container implements a private KMIP server for Synology DSM to store the
 Encryption Key Vault. By default, DSM offers you to store your vault on the same
 hard drives where you have encrypted data, which is a big security risk, or to
@@ -25,14 +27,10 @@ touches files in the directory it was launched from.
 
 1. Clone this repository
 ```
-$ git clone https://github.com/rnurgaliyev/kmip-server-dsm
-$ cd kmip-server-dsm
+$ git clone https://github.com/ngist/kmip-server-dsm
 ```
 
-2. Review configuration file with your favorite text editor (important!)
-```
-$ vim ./config.sh
-```
+2. Copy your certificates into the Cert folder, you need to add a CA.crt(certificate only), as well as a server.key and server.crt signed by the root-ca, for the KMIP server to identify itself.
 
 ### Building and runnning container manually
 
@@ -54,8 +52,7 @@ file system or RAM disk. You can always wipe the contents of these directories
 and start from scratch if you have recovery keys for your NAS volumes.
 
 ## Synology DSM configuration
-Shortly after the container is started for the first time, some SSL keys and
-certificates in the `certs` directory. You will need to copy these files to your
+You will need to add the following to the NAS(es) that will connect to the KMIP server.
 NAS:
 
 * client.key

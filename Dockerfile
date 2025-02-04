@@ -18,12 +18,6 @@ COPY assets/server.conf /etc/pykmip
 
 COPY assets/policy.json /etc/pykmip/policy
 
-COPY config.sh /etc/pykmip
-
-COPY assets/init.sh /bin/init.sh
-
-RUN chmod 755 /bin/init.sh
-
 EXPOSE 5696
 
-ENTRYPOINT /bin/init.sh
+ENTRYPOINT pykmip-server
